@@ -18,6 +18,7 @@ function onReady() {
   $(".attacks").on("click", ".dragon-blade", attackDragon);
   $(".attacks").on("click", ".star-fire", attackStar);
   // - Updates state which is ->
+
   // - Rendered to the DOM
   render();
 }
@@ -28,7 +29,7 @@ function attackSceptre() {
   fungusHP -= 14;
 
   conditionals();
-
+  meter();
   console.log(`AP:${myAP}, HP:${fungusHP}`);
 
   render();
@@ -36,10 +37,10 @@ function attackSceptre() {
 
 function attackEntangle() {
   console.log("attack ENTANGLE");
-  myAP -= 12;
-  fungusHP -= 14;
+  myAP -= 23;
+  fungusHP -= 9;
   conditionals();
-
+  meter();
   console.log(`AP:${myAP}, HP:${fungusHP}`);
 
   render();
@@ -51,7 +52,7 @@ function attackDragon() {
   fungusHP -= 47;
 
   conditionals();
-
+  meter();
   console.log(`AP:${myAP}, HP:${fungusHP}`);
 
   render();
@@ -63,7 +64,7 @@ function attackStar() {
   fungusHP -= 25;
 
   conditionals();
-
+  meter();
   console.log(`AP:${myAP}, HP:${fungusHP}`);
 
   render();
@@ -73,16 +74,23 @@ function render() {
   console.log("In render");
   $(".ap-text.ap-text").html(`<div class="ap-text">${myAP} AP</div>`);
   $(".hp-text.hp-text").html(`<div class="hp-text">${fungusHP} HP</div>`);
+  $(".fungus-action").html('<div class="freaky-fungus walk"></div>');
 }
 
 function conditionals() {
   if (myAP <= 0) {
     myAP = 0;
-    $(".walk").html('<div class="freaky-fungus jump"></div>');
+    $(".fungus-action").html('<div class="freaky-fungus jump"></div>');
+    //$("#disabled").hide();
   }
 
   if (fungusHP <= 0) {
     fungusHP = 0;
-    $(".walk").html('<div class="freaky-fungus dead"></div>');
+    $(".fungus-action").html('<div class="freaky-fungus dead"></div>');
   }
+}
+
+function meter() {
+  $("#ap-meter").val(myAP);
+  $("#hp-meter").val(fungusHP);
 }
